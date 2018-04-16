@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simon Says</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <style>
+        body{
+            background-image: url(12.jpg);
+            background-repeat: repeat;
+        }
+        .container{
+            margin: 0;
+            position: absolute;
+            top: 10%;
+            left: 15%;
+            margin-right: -25%;
+        }
+        img{
+            width: 800px;
+            height: 500px;
+        }
+        .fadein {
+            border-radius: 25%;
+            opacity: .5;
+        }
+        #green {
+            border-radius: 0 0 0 180%;
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#c9de96+0,8ab66b+44,398235+100;Green+3D+%233 */
+            background: #c9de96; /* Old browsers */
+            background: -moz-linear-gradient(top, #c9de96 0%, #8ab66b 44%, #398235 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, #c9de96 0%,#8ab66b 44%,#398235 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, #c9de96 0%,#8ab66b 44%,#398235 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c9de96', endColorstr='#398235',GradientType=0 ); /* IE6-9 */
+        }
+
+        #red {
+            border-radius: 0 180% 0 0;
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f85032+0,f16f5c+25,f6290c+59,f6290c+59,f6290c+61,f6290c+71,f02f17+82,f02f17+82,e73827+100;Red+Gloss+%231 */
+            background: #f85032; /* Old browsers */
+            background: -moz-linear-gradient(top, #f85032 0%, #f16f5c 25%, #f6290c 59%, #f6290c 59%, #f6290c 61%, #f6290c 71%, #f02f17 82%, #f02f17 82%, #e73827 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, #f85032 0%,#f16f5c 25%,#f6290c 59%,#f6290c 59%,#f6290c 61%,#f6290c 71%,#f02f17 82%,#f02f17 82%,#e73827 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, #f85032 0%,#f16f5c 25%,#f6290c 59%,#f6290c 59%,#f6290c 61%,#f6290c 71%,#f02f17 82%,#f02f17 82%,#e73827 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f85032', endColorstr='#e73827',GradientType=0 ); /* IE6-9 */
+        }
+
+        #yellow {
+            border-radius: 180% 0 0 0;
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fceabb+0,fccd4d+27,f8b500+74,fbdf93+100 */
+            background: #fceabb; /* Old browsers */
+            background: -moz-linear-gradient(top, #fceabb 0%, #fccd4d 27%, #f8b500 74%, #fbdf93 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, #fceabb 0%,#fccd4d 27%,#f8b500 74%,#fbdf93 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, #fceabb 0%,#fccd4d 27%,#f8b500 74%,#fbdf93 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', endColorstr='#fbdf93',GradientType=0 ); /* IE6-9 */
+        }
+
+        #blue {
+            border-radius: 0 0 180% 0;
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#3b679e+0,2b88d9+50,7db9e8+100 */
+            background: #3b679e; /* Old browsers */
+            background: -moz-linear-gradient(top, #3b679e 0%, #2b88d9 50%, #7db9e8 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, #3b679e 0%,#2b88d9 50%,#7db9e8 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, #3b679e 0%,#2b88d9 50%,#7db9e8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b679e', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
+        }
+        #show-rounds{
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7d7e7d+0,0e0e0e+100;Black+3D */
+            background: #7d7e7d; /* Old browsers */
+            background: -moz-linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, #7d7e7d 0%,#0e0e0e 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, #7d7e7d 0%,#0e0e0e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-9 */
+        }
+        #start {
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7d7e7d+0,0e0e0e+100;Black+3D */
+            background: #7d7e7d; /* Old browsers */
+            background: -moz-linear-gradient(top, #7d7e7d 0%, #0e0e0e 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, #7d7e7d 0%,#0e0e0e 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, #7d7e7d 0%,#0e0e0e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-9 */
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row m-auto" style="height: 300px">
+        <div id="yellow" class="col-4 fadein bg-warning ml-5" style="height: 300px"></div>
+        <div id="red" class="col-4 fadein bg-danger m-0" style="height: 300px"></div>
+    </div>
+    <div class="row m-auto" style="height: 300px">
+        <div id="green" class="col-4 fadein bg-success ml-5 " style="height: 300px"></div>
+        <div id="blue" class="col-4 fadein bg-primary m-0 " style="height: 300px"></div>
+    </div>
+    <div class="row" style="height: 200px;">
+        <div class="m-auto">
+            <button id="start" class="col-md text-white border border-dark rounded-circle m-auto" style="height: 75px" >START</button>
+        </div>
+        <button id="show-rounds" class="m-auto text-white border border-dark rounded-circle" >ROUNDS
+        </button>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script>
+        (function() {
+            "use strict";
+
+
+            /*
+            1. GAME WITH 4 COLORS THAT START WITH A CLICK
+            2. WITH THE CLICK RANDOMLY ONE OF THE COLORS SHOULD LIGHT AND THEN START A SEQUENCE
+            */
+            // FOR GAME SETTINGS WE'LL NEED:
+
+            var sequence = [];
+            var userSequence = [];
+            var rounds = 0;
+            var passLevel = false;
+
+            //   TO RANDOMIZE THE COLORS
+
+            var forColors = function(arr) {
+                var colorsArray = ["green", "red", "yellow", "blue"];
+                return arr.push(colorsArray[Math.floor(Math.random() * colorsArray.length)]);
+            };
+
+// TO ADD EFECT
+
+            var lightColors = function(arr) {
+                var i = 0;
+
+                var interval = setInterval(function() {
+                    $("#" + arr[i]).animate({opacity: 1}, 200).animate({opacity:.5}, 100);
+                    i++;
+                    if (i >= arr.length) {
+                        clearInterval(interval);
+                    }
+                }, 1500);
+            };
+
+            // 3. THE USER MUST REPEAT THIS SEQUENCE OF LIGHTS
+
+
+            function resetUserSequence () {
+                userSequence = [];
+            }
+
+            function updateRounds () {
+                rounds++;
+                $("#show-rounds").html(rounds);
+            };
+
+            function resetGame () {
+                rounds = 0;
+                $("#show-rounds").html(rounds);
+                sequence = [];
+                resetUserSequence();
+            }
+
+            //  4. WHEN THE USER REPEAT CORRECTLY THE SEQUENCE THE COMPUTER RETURNS
+
+            var userTurn = function() {
+                updateRounds();
+                forColors(sequence);
+                lightColors(sequence);
+
+
+                $(".fadein").off("click").on("click", function() {
+                    userSequence.push($(this).attr("id"));
+
+                    for (var i = 0; i < userSequence.length; i++) {
+                        //game continues
+                        if (JSON.stringify(sequence) === JSON.stringify(userSequence)) {
+                            resetUserSequence();
+                            userTurn();
+                            break;
+                        }
+
+                        //game over
+                        if (userSequence[i] !== sequence[i]) {
+                            if (passLevel === false) {
+                                alert("Game Over!");
+                                resetGame();
+                                break;
+                            }
+                        }
+                    }
+                });
+            };
+
+            $("#start").click(function() {
+                userTurn();
+            });
+
+            /*
+             A NEW SEQUENCE THAT WILL INCREMENT THE RANDOM NUMBER OF LIGHTS TURNING ON
+             5.WHEN THE USER FAILS TO REPEAT THE SEQUENCE GIVEN BY THE COMPUTER THE GAME STOPS
+             6. THERE MUST BE A COUNT OF THE ROUNDS FOR THE USER WHEN WINS SEVERAL SEQUENCES
+             */
+
+
+
+        })();
+    </script>
+</body>
+</html>
